@@ -3,18 +3,28 @@ import Modal from "react-modal";
 import IOPoolTokenInput from "../Inputs/IopoolKeyInput";
 import { SubmitIOPoolKeyButton } from "../SubmitButtons/SubmitIopool";
 
-export function IopoolModal({
-  isOpen,
-  setOpen,
-}: {
+interface IMessage {
+  message: string;
+  color: string;
+}
+
+interface IIopoolModalProps {
   isOpen: boolean;
   setOpen: Function;
-}) {
-  const [apiKey, setApiKey] = useState("");
-  const [validApiKey, setValidApiKey] = useState(false);
-  const [message, updateMessage] = useState({ message: "", color: "white" });
-  const [disappear, setDisappear] = useState(false);
-    const handleCloseModal = () => {
+}
+
+export const IopoolModal: React.FC<IIopoolModalProps> = ({
+  isOpen,
+  setOpen,
+}) => {
+  const [apiKey, setApiKey] = useState<string>("");
+  const [validApiKey, setValidApiKey] = useState<boolean>(false);
+  const [message, updateMessage] = useState<IMessage>({
+    message: "",
+    color: "white",
+  });
+  const [disappear, setDisappear] = useState<boolean>(false);
+  const handleCloseModal = () => {
     setOpen(false);
     setApiKey("");
     setValidApiKey(false);
