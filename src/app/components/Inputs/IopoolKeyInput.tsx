@@ -4,7 +4,8 @@ const IOPoolTokenInput = ({
   setValid,
   disappear,
   placeholder,
-  inputType
+  inputType,
+  type,
 }: {
   token: string;
   setToken: Function;
@@ -12,6 +13,7 @@ const IOPoolTokenInput = ({
   disappear: boolean;
   placeholder: string;
   inputType: string;
+  type?: "iopool";
 }) => (
   <input
     type={inputType}
@@ -21,7 +23,9 @@ const IOPoolTokenInput = ({
     data-form-type="other"
     onChange={(e) => {
       setToken(e.target.value);
-      setValid(e.target.value.trim() !== '');
+      type === "iopool"
+        ? setValid(/^[a-zA-Z0-9]{40}$/.test(e.target.value))
+        : setValid(e.target.value !== "");
     }}
     placeholder={placeholder}
     className={`${

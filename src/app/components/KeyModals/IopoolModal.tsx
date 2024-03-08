@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import IOPoolTokenInput from "../Inputs/IopoolKeyInput";
 import { SubmitIOPoolKeyButton } from "../SubmitButtons/SubmitIopool";
@@ -24,6 +24,19 @@ export const IopoolModal: React.FC<IIopoolModalProps> = ({
     color: "white",
   });
   const [disappear, setDisappear] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isOpen]);
+
   const handleCloseModal = () => {
     setOpen(false);
     setApiKey("");
@@ -34,8 +47,9 @@ export const IopoolModal: React.FC<IIopoolModalProps> = ({
   return (
     <Modal
       isOpen={isOpen}
-      className="bg-[#0CA7E5] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white p-4 w-auto sm:w-[600px]"
-      overlayClassName="inset-0 bg-black"
+      onRequestClose={handleCloseModal}
+      className="bg-[#0CA7E5] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white p-4 w-auto sm:w-[600px] rounded-[10px]"
+      overlayClassName="fixed inset-0 bg-black/60"
     >
       <div className="flex justify-end">
         <button
@@ -56,6 +70,7 @@ export const IopoolModal: React.FC<IIopoolModalProps> = ({
           disappear={disappear}
           inputType="text"
           placeholder="Enter API Key"
+          type="iopool"
         />
 
         <SubmitIOPoolKeyButton
