@@ -48,28 +48,12 @@ export function SubmitIOPoolKeyButton({
       onClick={() =>
         handleIOPoolSubmit(apiKey, updateMessage, disappearInput, activeAddress!)
       }
-      style={{
-        ...buttonStyle,
-        backgroundColor: valid ? "cyan" : "gray",
-        width: "fit-content",
-        alignSelf: "center",
-      }}
+      className={`py-4 px-6 text-base font-medium rounded-lg focus:outline-none ${
+        valid ? "bg-[#00FFFF]" : "bg-gray-400"
+      }`}
       disabled={!valid}
     >
       Submit
     </button>
   );
 }
-
-const buttonStyle = {
-  backgroundColor: "yellow",
-  border: "none",
-  color: "black",
-  padding: "15px 32px",
-  textDecoration: "none",
-  display: "inline-block",
-  fontSize: "16px",
-  margin: "4px 2px",
-  cursor: "pointer",
-  borderRadius: "5px",
-};

@@ -4,7 +4,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'FRY Water Portal',
-  description: 'Link your weather devices to your wallet and earn $FRY',
+  description: 'Link your Water devices to your wallet and earn $FRY',
 }
 export default function RootLayout({
   children,

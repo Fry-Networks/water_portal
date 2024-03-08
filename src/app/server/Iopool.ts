@@ -7,7 +7,7 @@ const ioPoolUrl = `http://${process.env.API_HOST}:${process.env.API_PORT}/api/su
 
 export async function submitIOApiKey(apiKey: string, address: string) {
   try {
-    const response = await axios.post(ioPoolUrl, {  apiKey, address });
+    const response = await axios.post(ioPoolUrl, { apiKey, address });
 
     if (response.status === 200) {
       const responseData = response.data;
@@ -16,7 +16,10 @@ export async function submitIOApiKey(apiKey: string, address: string) {
         verified: true,
         data: {
           message: responseData.message || "Success",
-          color: responseData.status === "ERROR" ? StatusColors.ERROR : StatusColors.SUCCESS,
+          color:
+            responseData.status === "ERROR"
+              ? StatusColors.ERROR
+              : StatusColors.SUCCESS,
         },
       };
     }
@@ -31,7 +34,10 @@ export async function submitIOApiKey(apiKey: string, address: string) {
         message = error.response.data.message;
       }
 
-      color = error.response.data.status === "ERROR" ? StatusColors.ERROR : StatusColors.SUCCESS;
+      color =
+        error.response.data.status === "ERROR"
+          ? StatusColors.ERROR
+          : StatusColors.SUCCESS;
     }
 
     console.error("Error submitting API key:", error);

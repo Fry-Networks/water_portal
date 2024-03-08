@@ -49,7 +49,7 @@ export default function Connect() {
   return (
     <div className="flex flex-row flex-wrap justify-center items-center text-center px-32">
       {providers?.map((provider) => (
-        (provider.isConnected || !anyConnected) && (
+        (provider?.isConnected || !anyConnected) && (
           <div key={"provider-" + provider.metadata.id} className="m-4 flex flex-col items-center relative flex-auto">
             <h4 className="flex items-center justify-center">
               <img width={30} height={30} alt="" src={provider.metadata.icon} className="mr-2" />

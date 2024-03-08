@@ -1,4 +1,3 @@
-
 const IOPoolTokenInput = ({
   token,
   setToken,
@@ -25,16 +24,10 @@ const IOPoolTokenInput = ({
       setValid(e.target.value.trim() !== '');
     }}
     placeholder={placeholder}
-    style={tokenInputStyle}
-    className={disappear ? 'fade-out' : ''}
+    className={`${
+      disappear ? "opacity-0" : ""
+    } appearance-none border h-11 w-[300px] border-gray-300 text-black rounded-md py-2 px-4 mb-4 leading-tight focus:outline-none focus:border-blue-500`}
   />
 );
-
-const tokenInputStyle = {
-  color: 'black',
-  padding: '10px',
-  marginBottom: '10px',
-  borderRadius: '5px',
-};
 
 export default IOPoolTokenInput;

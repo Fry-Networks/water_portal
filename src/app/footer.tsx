@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer className="footer flex justify-between h-auto w-[100vw] text-white bg-[#111111] p-5">
-      <ColoredLine color="rgba(256,256,256,0.5)" />
+      <ColoredLine />
 
       <div className="flex flex-col justify-start mt-5 ml-6">
         <p>
@@ -238,18 +238,8 @@ interface LineProps {
   color: string;
 }
 
-const ColoredLine: React.FC<LineProps> = ({ color }) => (
+const ColoredLine: React.FC = () => (
   <div
-    style={{
-      backgroundColor: color,
-      height: "1px",
-      width: "80%",
-      marginBottom: "40px",
-      marginTop: "10px",
-      position: "absolute",
-      //center it
-      left: "50%",
-      transform: "translate(-50%, -50%)",
-    }}
+    className={`bg-[#888888] h-[1px] w-4/5 absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2`}
   />
 );
