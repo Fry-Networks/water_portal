@@ -51,7 +51,7 @@ export const IopoolModal: React.FC<IIopoolModalProps> = ({
       className="bg-[#0CA7E5] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white p-4 w-auto sm:w-[600px] rounded-[10px]"
       overlayClassName="fixed inset-0 bg-black/60"
     >
-      <div className="flex justify-end">
+      <div className="flex justify-end mt-2">
         <button
           className="text-[20px] rounded-[50%] border-white border-t "
           onClick={handleCloseModal}
