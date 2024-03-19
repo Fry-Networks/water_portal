@@ -30,7 +30,7 @@ const IOPoolTokenInput = ({
     placeholder={placeholder}
     className={`${
       disappear ? "opacity-0" : ""
-    } appearance-none border h-11 w-[300px] border-gray-300 text-black rounded-md py-2 px-4 mb-4 leading-tight focus:outline-none focus:border-blue-500`}
+    } appearance-none border h-11 w-[300px] border-gray-300 text-black rounded-md py-2 px-4 mb-6 leading-tight focus:outline-none focus:border-blue-500`}
   />
 );
 
