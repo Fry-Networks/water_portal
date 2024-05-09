@@ -13,6 +13,7 @@ import {
 import { WalletConnectModalSign } from "@walletconnect/modal-sign-html";
 import { useEffect, useState } from "react";
 import Connect from "./components/Connect";
+import { EcowittModal } from "./components/KeyModals/EcowittModal";
 import { IopoolModal } from "./components/KeyModals/IopoolModal";
 import OpenButton from "./components/OpenButton";
 
@@ -39,13 +40,17 @@ export default function Wallet() {
     ],
   });
   const [isIopoolModalOpen, setIsIopoolModalOpen] = useState(false);
+  const [isEcowittModalOpen, setIsEcowittModalOpen] = useState(false);
   const { activeAddress } = useWallet();
   const showIopoolModal = () => {
     setIsIopoolModalOpen(true);
   };
+  const showEcowittModal = () => {
+    setIsEcowittModalOpen(true);
+  };
   useEffect(() => {
     if (walletProviders !== null) {
-      console.log(walletProviders)
+      console.log(walletProviders);
       reconnectProviders(walletProviders);
     }
   }, []);
@@ -66,13 +71,26 @@ export default function Wallet() {
       <WalletProvider value={walletProviders}>
         <div className="flex flex-col p-5 bg-[#84808a] rounded-[10px] w-[100vw] shadow-md">
           <Connect />
-          <div className="flex justify-center items-center">
+          <div className="flex justify-center items-center gap-4">
             <OpenButton
-            showModal={showIopoolModal}
-            text="IO Pool" logo="/iopool.png" />
+              showModal={showIopoolModal}
+              text="IO Pool"
+              logo="/iopool.png"
+            />
             <IopoolModal
-            isOpen={isIopoolModalOpen}
-            setOpen={setIsIopoolModalOpen} />
+              isOpen={isIopoolModalOpen}
+              setOpen={setIsIopoolModalOpen}
+            />
+
+            <OpenButton
+              showModal={showEcowittModal}
+              text="Eciwitt API"
+              logo="/ecowitt.png"
+            />
+            <EcowittModal
+              isOpen={isEcowittModalOpen}
+              setOpen={setIsEcowittModalOpen}
+            />
           </div>
         </div>
       </WalletProvider>
