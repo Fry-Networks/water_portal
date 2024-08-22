@@ -1,14 +1,15 @@
 import { submitIOApiKey } from "@/app/server/Iopool";
 import { useWallet } from "@txnlab/use-wallet";
+import { useState } from "react";
 
 export function SubmitIOPoolKeyButton({
-  valid,
   apiKey,
+  minerKey,
   updateMessage,
   disappearInput,
 }: {
-  valid: boolean;
   apiKey: string;
+  minerKey: string;
   updateMessage: ({
     message,
     color,
@@ -19,18 +20,25 @@ export function SubmitIOPoolKeyButton({
   disappearInput: Function;
 }) {
   const { activeAddress } = useWallet();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const isValidApiKey = /^[a-zA-Z0-9]{40}$/i.test(apiKey);
+  const isValidMiner = /^([A-Z]{2,6})-[A-Z0-9]{32}$/i.test(minerKey);
+  const isValidKeys = isValidApiKey && isValidMiner;
 
   const handleIOPoolSubmit = async (
     apiKey: string,
+    minerKey: string,
     updateMessage: Function,
     disappearInput: Function,
     activeAddress: string
   ) => {
+    setIsLoading(true);
     disappearInput(true);
     updateMessage({ message: "Submitting Key...", color: "white" });
 
     try {
-      const response = await submitIOApiKey(apiKey, activeAddress);
+      const response = await submitIOApiKey(apiKey, minerKey, activeAddress);
       updateMessage(response?.data);
     } catch (error) {
       console.error("Error submitting IO Pool API key:", error);
@@ -39,6 +47,7 @@ export function SubmitIOPoolKeyButton({
         color: "red",
       });
     } finally {
+      setIsLoading(false);
       disappearInput(false);
     }
   };
@@ -46,14 +55,14 @@ export function SubmitIOPoolKeyButton({
   return (
     <button
       onClick={() =>
-        handleIOPoolSubmit(apiKey, updateMessage, disappearInput, activeAddress!)
+        handleIOPoolSubmit(apiKey, minerKey, updateMessage, disappearInput, activeAddress!)
       }
       className={`py-4 px-6 text-base font-medium rounded-lg focus:outline-none ${
-        valid ? "bg-[#00FFFF]" : "bg-gray-400"
+        isValidKeys ? "bg-[#00FFFF]" : "bg-gray-400"
       }`}
-      disabled={!valid}
+      disabled={!isValidKeys || isLoading}
     >
-      Submit
+      {isLoading ? "Submitting..." : "Submit"}
     </button>
   );
 }

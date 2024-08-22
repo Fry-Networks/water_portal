@@ -5,12 +5,14 @@ export function SubmitEcowittButton({
   valid,
   apiKey,
   appKey,
+  minerKey,
   updateMessage,
   disappearInput,
 }: {
   valid?: boolean;
   apiKey: string;
   appKey: string;
+  minerKey: string;
   updateMessage: ({
     message,
     color,
@@ -24,7 +26,8 @@ export function SubmitEcowittButton({
 
   const isValidApiKey = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(apiKey);
   const isValidAppKey = /^[0-9a-f]{32}$/i.test(appKey);
-  const isValidKeys = isValidApiKey && isValidAppKey;
+  const isValidMiner = /^([A-Z]{2,6})-[A-Z0-9]{32}$/i.test(minerKey);
+  const isValidKeys = isValidApiKey && isValidAppKey && isValidMiner;
 
   const handleEcowittSubmit = async (
     
@@ -36,7 +39,7 @@ export function SubmitEcowittButton({
     updateMessage({ message: "Submitting Key...", color: "white" });
 
     try {
-      const response = await submitEcowittKey(apiKey,appKey, activeAddress);
+      const response = await submitEcowittKey(apiKey,appKey,minerKey,activeAddress);
       updateMessage(response?.data);
     } catch (error) {
       console.error("Error submitting IO Pool API key:", error);

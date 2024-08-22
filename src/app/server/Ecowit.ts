@@ -5,9 +5,9 @@ import { StatusColors } from "./consts";
 
 const EcowittUrl = `http://${process.env.API_HOST}:${process.env.API_PORT}/api/submitEcokey`;
 
-export async function submitEcowittKey(apiKey: string,appKey: string, address: string) {
+export async function submitEcowittKey(apiKey: string,appKey: string,minerKey: string, address: string) {
   try {
-    const response = await axios.post(EcowittUrl, { apiKey,appKey, address });
+    const response = await axios.post(EcowittUrl, { apiKey,appKey,minerKey, address });
 
     if (response.status === 200) {
       const responseData = response.data;

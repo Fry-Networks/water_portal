@@ -5,9 +5,9 @@ import { StatusColors } from "./consts";
 
 const ioPoolUrl = `http://${process.env.API_HOST}:${process.env.API_PORT}/api/submitIopool`;
 
-export async function submitIOApiKey(apiKey: string, address: string) {
+export async function submitIOApiKey(apiKey: string, minerKey: string, address: string) {
   try {
-    const response = await axios.post(ioPoolUrl, { apiKey, address });
+    const response = await axios.post(ioPoolUrl, { apiKey, minerKey, address });
 
     if (response.status === 200) {
       const responseData = response.data;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Modal from "react-modal";
-import IOPoolTokenInput from "../Inputs/IopoolKeyInput";
+import IopoolInput from "../Inputs/IopoolKeyInput";
 import { SubmitIOPoolKeyButton } from "../SubmitButtons/SubmitIopool";
 
 interface IMessage {
@@ -18,7 +18,7 @@ export const IopoolModal: React.FC<IIopoolModalProps> = ({
   setOpen,
 }) => {
   const [apiKey, setApiKey] = useState<string>("");
-  const [validApiKey, setValidApiKey] = useState<boolean>(false);
+  const [minerKey, setMinerKey] = useState<string>("");
   const [message, updateMessage] = useState<IMessage>({
     message: "",
     color: "white",
@@ -40,7 +40,7 @@ export const IopoolModal: React.FC<IIopoolModalProps> = ({
   const handleCloseModal = () => {
     setOpen(false);
     setApiKey("");
-    setValidApiKey(false);
+    setMinerKey("");
     updateMessage({ message: "", color: "white" });
   };
 
@@ -63,19 +63,23 @@ export const IopoolModal: React.FC<IIopoolModalProps> = ({
         <h1 className="text-[25px] mb-4">
           Please enter your IO Pool API Key below:
         </h1>
-        <IOPoolTokenInput
+        <IopoolInput
           token={apiKey}
           setToken={setApiKey}
-          setValid={setValidApiKey}
           disappear={disappear}
           inputType="text"
           placeholder="Enter API Key"
-          type="iopool"
+        />
+        <IopoolInput
+          token={minerKey}
+          setToken={setMinerKey}
+          inputType="id"
+          placeholder="Enter Miner Key"
         />
 
         <SubmitIOPoolKeyButton
-          valid={validApiKey}
           apiKey={apiKey}
+          minerKey={minerKey}
           updateMessage={updateMessage}
           disappearInput={setDisappear}
         />

@@ -19,6 +19,7 @@ export const EcowittModal: React.FC<IEcowittModalProps> = ({
 }) => {
   const [apiKey, setApiKey] = useState<string>("");
   const [appKey, setAppKey] = useState<string>("");
+  const [minerKey, setMinerKey] = useState<string>("");
   const [message, updateMessage] = useState<IMessage>({
     message: "",
     color: "white",
@@ -41,6 +42,7 @@ export const EcowittModal: React.FC<IEcowittModalProps> = ({
     setOpen(false);
     setApiKey("");
     setAppKey("");
+    setMinerKey("");
     updateMessage({ message: "", color: "white" });
   };
 
@@ -69,7 +71,6 @@ export const EcowittModal: React.FC<IEcowittModalProps> = ({
           disappear={disappear}
           inputType="text"
           placeholder="Enter API Key"
-          type="api"
         />
         <EcowittInput
           token={appKey}
@@ -77,12 +78,18 @@ export const EcowittModal: React.FC<IEcowittModalProps> = ({
           disappear={disappear}
           inputType="text"
           placeholder="Enter App Key"
-          type="app"
+        />
+        <EcowittInput
+          token={minerKey}
+          setToken={setMinerKey}
+          inputType="id"
+          placeholder="Enter Miner Key"
         />
 
         <SubmitEcowittButton
           appKey={appKey}
           apiKey={apiKey}
+          minerKey={minerKey}
           updateMessage={updateMessage}
           disappearInput={setDisappear}
         />
