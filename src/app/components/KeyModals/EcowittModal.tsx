@@ -68,14 +68,12 @@ export const EcowittModal: React.FC<IEcowittModalProps> = ({
         <EcowittInput
           token={apiKey}
           setToken={setApiKey}
-          disappear={disappear}
           inputType="text"
           placeholder="Enter API Key"
         />
         <EcowittInput
           token={appKey}
           setToken={setAppKey}
-          disappear={disappear}
           inputType="text"
           placeholder="Enter App Key"
         />
