@@ -84,7 +84,7 @@ export default function Wallet() {
 
             <OpenButton
               showModal={showEcowittModal}
-              text="Ecowitt API"
+              text="Ecowitt"
               logo="/ecowitt.png"
             />
             <EcowittModal
